@@ -52,7 +52,7 @@ class SubsController < ApplicationController
         @sub ||= Sub.find(params[:id])
 
         if @sub && @sub.destroy
-
+            redirect_to subs_url
         end
     end
 

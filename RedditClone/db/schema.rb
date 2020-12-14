@@ -10,15 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_14_155818) do
+ActiveRecord::Schema.define(version: 2020_12_14_191012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "post_subs", force: :cascade do |t|
+    t.integer "sub_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subs", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "moderator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["moderator_id"], name: "index_subs_on_moderator_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "session_token"
-    t.string "password_digest"
+    t.string "username", null: false
+    t.string "session_token", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
